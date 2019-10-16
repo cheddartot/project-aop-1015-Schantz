@@ -1,0 +1,5 @@
+public aspect TraceAspectSchantz {
+	pointcut classToTrace(): within(*App);
+	pointcut methodToTrace(): classToTrace() && execution(String getName());
+
+}

@@ -1,0 +1,14 @@
+public aspect TraceAspectSchantz {
+	pointcut classToTrace(): within(*App);
+	pointcut methodToTrace(): classToTrace() && execution(String getName());
+	//stuff before getName() returns anything
+	before(): methodToTrace() {
+		String info = thisJoinPointStaticPart.getSignature() + "\n"
+				+ thisJoinPointStaticPart.getSourceLocation().getLine();
+		System.out.println(info);
+	}
+	
+	after(): methodToTrace() {
+		System.out.println(thisJoinPointStaticPart.getSourceLocation().getFileName());
+	}
+}
